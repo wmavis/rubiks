@@ -39,7 +39,7 @@
         background-color: red;
       }
       .move-button {
-	width: 50px;
+        width: 50px;
       }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
@@ -50,11 +50,11 @@
       function createFace(d, face) {
         var table = $('<table class="face" />')
         var row;
-	var square;
+        var square;
         for(var i = 0; i < d; i++) {
           row = $('<tr>');
           for(var j = 1; j <= d; j++) {
-	    square = squares[face][i][j - 1];
+            square = squares[face][i][j - 1];
             row.append('<td class="' + square[0] + '">' + square[1] + '</td>');
           }
           table.append(row);
@@ -63,7 +63,7 @@
       };
 
       function createCube(d) {
-	var cube = $('<table class="cube" />');
+        var cube = $('<table class="cube" />');
         cube.append($('<tr>').append($('<td>').append(createFace(d, 'U'))));
         var row = $('<tr>');
         $.each(['F', 'R', 'B', 'L'], function(index, face) {
@@ -71,97 +71,81 @@
         });
         cube.append(row);
         cube.append($('<tr>').append($('<td>').append(createFace(d, 'D'))));
-	return cube;
+        return cube;
       }
 
       function reset() {
-	var d = $('#dimension')[0].value;
+        var d = $('#dimension')[0].value;
         $('.cube').empty();
-	squares = {};
-	colors = ['W', 'Y', 'B', 'O', 'G', 'R'];
+        squares = {};
+        colors = ['W', 'Y', 'B', 'O', 'G', 'R'];
         $.each(['U', 'D', 'F', 'R', 'B', 'L'], function(index, face) {
           squares[face] = [];
           for(var i = 0; i < d; i++) {
             squares[face][i] = [];
             for(var j = 1; j <= d; j++) {
               squares[face][i][j - 1] = [colors[index], d*i + j];
-	    }
+            }
           }
         });
-	body.append(createCube(d));
+        body.append(createCube(d));
       }
 
       function move(button) {
-	var d = $('#dimension')[0].value;
+        var d = $('#dimension')[0].value;
         var moves = $('#moves');
-	var temp;
-	moves.append(button.value + ' ');
-	switch(button.value) {
+        var temp;
+        moves.append(button.value + ' ');
+        switch(button.value) {
           case 'U':
-	    break;
+            break;
           case 'D':
-	    break;
+            break;
           case 'F':
-	    break;
+            break;
           case 'R':
-	    break;
+            break;
           case 'B':
-	    break;
+            break;
           case 'L':
-	    faces = ['F', 'U', 'B', 'D'];
-	    for(var i = 0; i < faces.length; i++) {
-	      for(var j = 0; j < d; j++) {
-	        nextFace = faces[(i + 1) % faces.length];
-	      }
-  	    }
-	    break;
-	}
-	body.append(createCube(d));
+            faces = ['F', 'U', 'B', 'D'];
+            for(var i = 0; i < faces.length; i++) {
+              for(var j = 0; j < d; j++) {
+                nextFace = faces[(i + 1) % faces.length];
+              }
+            }
+          break;
+        }
+        body.append(createCube(d));
       };
 
       $(function() {
         body = $('body');
 
-	div = $('<div style="float: left">');
-	faces = ['L', 'R', 'U', 'D', 'F', 'B'];
+        div = $('<div style="float: left">');
+        faces = ['L', 'R', 'U', 'D', 'F', 'B'];
         $.each(faces, function(index, face) {
           div.append('<input type="button" class="move-button" value="' + face + '" onclick="javascript:move(this)" />');
         });
-	div.append('<span id="moves">Moves: </span>');
-	div.append('<br />');
+        div.append('<span id="moves">Moves: </span>');
+        div.append('<br />');
         $.each(faces, function(index, face) {
           div.append('<input type="button" class="move-button" value="' + face + '\'" onclick="javascript:move(this)" />');
         });
-	div.append('</div>');
-	body.append(div);
-	body.append('<div style="clear: both" />');
+        div.append('</div>');
+        body.append(div);
+        body.append('<div style="clear: both" />');
 
-	reset();
+        reset();
       });
     </script>
-    <!--
-    U U U
-    U U U
-    U U U
-    F F F R R R B B B L L L
-    F F F R R R B B B L L L
-    F F F R R R B B B L L L
-    D D D
-    D D D
-    D D D
-
-    W W W
-    W W W
-    W W W
-    B B B O O O G G G R R R
-    B B B O O O G G G R R R
-    B B B O O O G G G R R R
-    Y Y Y
-    Y Y Y
-    Y Y Y
-    -->
   </head>
   <body>
-    <div style="float: left"><select onchange="javascript:reset()" id="dimension"><option>2</option><option>3</option></select></span>
+    <div style="float: left">
+      <select onchange="javascript:reset()" id="dimension">
+        <option>2</option>
+        <option>3</option>
+      </select>
+    </div>
   </body>
 </html>
